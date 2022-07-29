@@ -2,32 +2,34 @@
 
 - `sources` (required, repeated)
 
-    List of selectors to match dataplanes that are sources of traffic.
+    List of selectors to match dataplanes that are sources of traffic.    
+    
+    - `match` (optional)
+    
+        Tags to match, can be used for both source and destinations
 
 - `destinations` (required, repeated)
 
-    List of selectors to match services that are destinations of traffic.
+    List of selectors to match services that are destinations of traffic.    
+    
+    - `match` (optional)
+    
+        Tags to match, can be used for both source and destinations
 
-- `conf` (required)
-
-    Child properties:    
+- `conf` (required)    
     
     - `connectTimeout` (optional)
     
         ConnectTimeout defines time to establish connection    
     
-    - `tcp` (optional)
-    
-        Child properties:    
+    - `tcp` (optional)    
         
         - `idleTimeout` (required)
         
             IdleTimeout is defined as the period in which there are no bytes sent
             or received on either the upstream or downstream connection    
     
-    - `http` (optional)
-    
-        Child properties:    
+    - `http` (optional)    
         
         - `requestTimeout` (optional)
         
@@ -39,10 +41,6 @@
         
             IdleTimeout is the time at which a downstream or upstream connection
             will be terminated if there are no active streams    
-    
-    - `grpc` (optional)
-    
-        Child properties:    
         
         - `streamIdleTimeout` (optional)
         
@@ -52,5 +50,21 @@
         - `maxStreamDuration` (optional)
         
             MaxStreamDuration is the maximum time that a stream’s lifetime will
+            span    
+    
+    - `grpc` (optional)
+    
+        Deprecated: set parameters through Http section    
+        
+        - `streamIdleTimeout` (optional)
+        
+            StreamIdleTimeout is the amount of time that the connection manager
+            will allow a stream to exist with no upstream or downstream activity
+            Deprecated: use Http.StreamIdleTimeout instead    
+        
+        - `maxStreamDuration` (optional)
+        
+            MaxStreamDuration is the maximum time that a stream’s lifetime will
             span
+            Deprecated: use Http.MaxStreamDuration instead
 
